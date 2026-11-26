@@ -8,6 +8,6 @@
     0.5
   ],
   "max_abs_diff_lognormal_vs_theorem_3_3": 0.00012262913267657716,
-  "mc_lognormal_smallest_T_gap": 0.5007018452430816,
-  "mc_special_case_smallest_T_gap": 0.5991938837870326
+  "mc_lognormal_smallest_T_gap": 0.5686064954820456,
+  "mc_special_case_smallest_T_gap": 0.635707815581062
 }

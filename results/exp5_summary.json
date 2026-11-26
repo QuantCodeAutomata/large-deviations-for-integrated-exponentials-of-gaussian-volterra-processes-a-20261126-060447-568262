@@ -1,0 +1,27 @@
+{
+  "full_run": false,
+  "H_grid": [
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5
+  ],
+  "eta": 2.0,
+  "lemma_3_20_holds_for_all_H": true,
+  "j3_nonpositive_for_all_H_rough_bergomi": true,
+  "h_half_check": {
+    "R_half_numeric": 0.13333333333333333,
+    "R_half_expected_2_over_15": 0.13333333333333333,
+    "R_half_abs_error": 0.0,
+    "j2_half_numeric": 0.375,
+    "j2_half_expected": 0.375,
+    "j3_half_numeric": -0.07499999999999998,
+    "j3_half_expected": -0.075
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "full_run": false,
+  "H_grid": [
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45
+  ],
+  "x_grid_max": 100.0,
+  "max_abs_ode_A2_residual_over_H": 1.1564094571901024e-05,
+  "max_abs_lemma_4_4_diff_over_H": 9.992007221626409e-16,
+  "variance_ratio_MG_vs_RL_at_H_half": 1.0,
+  "variance_ratio_equals_1_at_H_half": true
+}

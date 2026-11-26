@@ -1,0 +1,25 @@
+{
+  "full_run": false,
+  "H_values": [
+    0.1,
+    0.3,
+    0.5
+  ],
+  "eta": 2.0,
+  "mixed_weights": [
+    0.5,
+    0.5
+  ],
+  "mixed_etas": [
+    1.0,
+    3.0
+  ],
+  "lemma_4_4_max_abs_diff": 9.992007221626409e-16,
+  "mixed_bergomi_skew_always_positive": true,
+  "h_half_check": {
+    "sigma_atm_numeric": 1.1547005383792515,
+    "sigma_atm_expected_eta_over_sqrt3": 1.1547005383792517,
+    "skew_numeric": 0.11547005383792512,
+    "skew_expected_eta_over_10sqrt3": 0.11547005383792516
+  }
+}

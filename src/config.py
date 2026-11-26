@@ -47,8 +47,8 @@ NU_LOGNORMAL = (1.0, 2.0)  # nu in lognormal sigma^2(y)=e^{nu y} (implementation
 XI_SPECIAL_CASE = 1.0  # xi in sigma(y) = xi*sqrt(|y|) (Corollary 3.8), not specified -> unit scale
 STRIKE_GRID_OTM = tuple(np.round(np.exp(np.arange(-1.0, 1.01, 0.2)), 4))  # K/sigma0^2 grid, log-moneyness in [-1,1]
 
-T_GRID_PAPER = (1e-1, 1e-2, 1e-3)  # maturities T -> 0, per implementation_notes
-T_GRID_RUN = (1e-1, 1e-2, 1e-3)
+T_GRID_PAPER = (1e-1, 1e-2, 1e-3, 1e-4)  # maturities T -> 0, per implementation_notes
+T_GRID_RUN = (1e-1, 1e-2, 1e-3, 1e-4)
 
 # ---------------------------------------------------------------------------
 # exp_5: rate function expansion in log-moneyness (Prop 3.19)

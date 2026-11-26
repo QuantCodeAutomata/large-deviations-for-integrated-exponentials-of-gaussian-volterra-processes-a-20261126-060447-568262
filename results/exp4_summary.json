@@ -1,0 +1,30 @@
+{
+  "full_run": false,
+  "n_paths": 20000,
+  "T_grid": [
+    0.1,
+    0.01,
+    0.001,
+    0.0001
+  ],
+  "by_H": {
+    "0.1": {
+      "T_min": 0.0001,
+      "mc_coefficient": 0.3668565824309929,
+      "analytic_coefficient": 0.26896683057741805,
+      "relative_error": 0.36394730028020594
+    },
+    "0.3": {
+      "T_min": 0.0001,
+      "mc_coefficient": 0.2557055400274078,
+      "analytic_coefficient": 0.24741349933002643,
+      "relative_error": 0.033514908118738376
+    },
+    "0.5": {
+      "T_min": 0.0001,
+      "mc_coefficient": 0.22820484757294263,
+      "analytic_coefficient": 0.23032943298089034,
+      "relative_error": 0.009224115999642934
+    }
+  }
+}
