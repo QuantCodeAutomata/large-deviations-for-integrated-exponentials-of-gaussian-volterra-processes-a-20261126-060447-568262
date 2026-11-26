@@ -137,7 +137,15 @@ File: `results/exp4_thm_3_13.csv`, `exp4_cor_3_15.csv`,
   - H=0.3: relative error 3.4% — **Reproduced.**
   - H=0.1: relative error 36.4% — **Partially reproduced** (the same slow
     pre-asymptotic convergence at small H noted in Experiments 1-2: T^{0.1}
-    decays very slowly, so T=10⁻⁴ is still far from the T→0 regime).
+    decays very slowly, so T=10⁻⁴ is still far from the T→0 regime). This
+    cause was isolated directly: re-running the same Monte Carlo coefficient
+    for H=0.1 at T=10⁻⁶, 10⁻⁸ and 10⁻¹⁰ (same seed and path count) gives
+    relative errors 23.4%, 14.0% and 8.1%, monotonically approaching the
+    Theorem 3.13 value as T→0, while increasing the path count alone from
+    20 000 to 200 000 at T=10⁻⁴ left the estimate unchanged (36.9% vs. 39.1%
+    relative error). This confirms the gap is a slow-convergence effect of
+    the T→0 limit rather than a Monte Carlo sampling or implementation
+    error.
 * **Corollary 3.15 (Volterra-process ATM coefficient).**
   `exp4_cor_3_15.csv` confirms the analytic coefficient
   1/((2H+1)√(π(H+1))) matches the formula built from E[𝔄²] to machine
