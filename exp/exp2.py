@@ -62,8 +62,10 @@ def clt_check(H: float, samples: dict) -> list[dict]:
 
 def mdp_check(H: float, samples: dict) -> list[dict]:
     """Theorem 2.15: with a_eps = eps^{H * MDP_A_EPS_EXPONENT} (-> 0,
-    s_eps/a_eps -> 0), check a_eps^2/s_eps^2 * log P(|W_eps^MDP| > x) ->
-    -J(x) with J(u) = (H+1/2)^2(H+1) e^{-2 phi0} u^2 (quadratic MDP rate)."""
+    s_eps/a_eps -> 0), the family (1/a_eps)(Z_eps/eps - e^phi0 Phi_eps)
+    satisfies an LDP with speed a_eps^2/s_eps^2, i.e. its inverse
+    s_eps^2/a_eps^2 * log P(|W_eps^MDP| > x) -> -J(x) with
+    J(u) = (H+1/2)^2(H+1) e^{-2 phi0} u^2 (quadratic MDP rate)."""
     coeff = mdp_rate_function_coefficient(H, config.PHI_BASELINE)
     rows = []
     x_values = (0.5, 1.0, 1.5)
@@ -73,7 +75,7 @@ def mdp_check(H: float, samples: dict) -> list[dict]:
         W_mdp = data["W_eps"] * s_eps / a_eps  # (1/a_eps)(Z_eps/eps - e^phi0 Phi_eps)
         for x in x_values:
             p = float(np.mean(np.abs(W_mdp) > x))
-            lhs = (a_eps ** 2 / s_eps ** 2) * np.log(p) if p > 0 else np.nan
+            lhs = (s_eps ** 2 / a_eps ** 2) * np.log(p) if p > 0 else np.nan
             rhs = -coeff * x ** 2
             rows.append({"H": H, "eps": eps, "a_eps": a_eps, "x": x,
                          "empirical_tail_prob": p, "lhs_scaled_logP": lhs,

@@ -62,9 +62,17 @@ def monte_carlo_ldp_check(H: float, n_paths: int, n_grid: int, rng: np.random.Ge
         s_eps = config.NU_BASELINE * eps ** H
         Z_over_eps = np.mean(np.exp(s_eps * paths), axis=1)
         for z in config.MC_Z_LEVELS:
-            p = float(np.mean(Z_over_eps <= z))
+            # Z_eps/eps -> exp(phi(0)) = 1 a.s. as eps -> 0, so z < 1 is a lower-tail
+            # event {Z_eps/eps <= z} while z > 1 is an upper-tail event
+            # {Z_eps/eps > z}; both decay at rate J(log z) > 0 by Corollary 2.11.
+            if z < 1:
+                p = float(np.mean(Z_over_eps <= z))
+            elif z > 1:
+                p = float(np.mean(Z_over_eps > z))
+            else:
+                p = 1.0
             lhs = s_eps ** 2 * np.log(p) if p > 0 else np.nan
-            rhs = -J_func(np.log(z)) if z < 1 else (0.0 if z == 1 else np.nan)
+            rhs = -J_func(np.log(z)) if z != 1 else 0.0
             rows.append({"H": H, "eps": eps, "z": z, "s_eps": s_eps,
                          "empirical_prob": p, "lhs_s_eps2_logP": lhs,
                          "rhs_minus_J_logz": rhs})
@@ -72,7 +80,7 @@ def monte_carlo_ldp_check(H: float, n_paths: int, n_grid: int, rng: np.random.Ge
 
 
 def laplace_check(H: float, n_paths: int, n_grid: int, rng: np.random.Generator,
-                   J_func) -> list[dict]:
+                   J_func, bounds: tuple[float, float] = (-50.0, 50.0)) -> list[dict]:
     """Proposition 2.6 (Laplace/negative-moment statement, via Varadhan's
     lemma): s_eps^2 log E[(Z_eps/eps)^q] -> J*(q) = sup_u{qu - J(u)}, for
     positive and negative q (the negative-moment case)."""
@@ -86,7 +94,7 @@ def laplace_check(H: float, n_paths: int, n_grid: int, rng: np.random.Generator,
         Z_over_eps = np.mean(np.exp(s_eps * paths), axis=1)
         moment = float(np.mean(Z_over_eps ** q))
         lhs = s_eps ** 2 * np.log(moment) if moment > 0 else np.nan
-        star = fenchel_legendre_J_star(q, J_func)
+        star = fenchel_legendre_J_star(q, J_func, bounds=bounds)
         rows.append({"H": H, "q": q, "eps": smallest_eps, "empirical_log_moment_term": lhs,
                      "J_star_q": star["J_star"], "u_star": star["u_star"]})
     return rows
@@ -120,6 +128,7 @@ def main() -> None:
         if H == 0.5:
             J_closed = J_closed_form_half_vec(u_grid)
             J_func = J_closed_form_half
+            j_func_bounds = (-50.0, 50.0)
         else:
             J_closed = np.full_like(u_grid, np.nan)
             # Interpolated numeric J for use as J_func in downstream checks.
@@ -128,6 +137,7 @@ def main() -> None:
 
             def J_func(u, _u=u_sorted, _J=J_sorted):
                 return float(np.interp(u, _u, _J))
+            j_func_bounds = (float(u_sorted.min()), float(u_sorted.max()))
 
         for u, jn, jc in zip(u_grid, J_numeric, J_closed):
             rate_function_rows.append({"H": H, "u": float(u), "J_numeric": float(jn),
@@ -164,12 +174,12 @@ def main() -> None:
 
         print(f"[exp1] Fenchel-Legendre transform J*(x) for H={H} ...")
         for x in (-1.5, -0.5, 0.0, 0.5, 1.5):
-            star = fenchel_legendre_J_star(x, J_func)
+            star = fenchel_legendre_J_star(x, J_func, bounds=j_func_bounds)
             fenchel_rows.append({"H": H, "x": x, "J_star": star["J_star"], "u_star": star["u_star"]})
 
         print(f"[exp1] Monte Carlo LDP / Corollary 2.11 check for H={H} ...")
         mc_ldp_rows.extend(monte_carlo_ldp_check(H, n_mc_paths, n_mc_grid, rng, J_func))
-        laplace_rows.extend(laplace_check(H, n_mc_paths, n_mc_grid, rng, J_func))
+        laplace_rows.extend(laplace_check(H, n_mc_paths, n_mc_grid, rng, J_func, bounds=j_func_bounds))
 
     import csv
 

@@ -122,13 +122,23 @@ def J_closed_form_half_vec(u: np.ndarray) -> np.ndarray:
     return np.array([J_closed_form_half(float(x)) for x in u])
 
 
-def fenchel_legendre_J_star(x: float, J_func) -> dict:
+def fenchel_legendre_J_star(x: float, J_func, bounds: tuple[float, float] = (-50.0, 50.0)) -> dict:
     """J*(x) = sup_{u in R} { x*u - J(u) } (Proposition 2.6), via
-    scipy.optimize.minimize_scalar on -(x*u - J(u))."""
+    scipy.optimize.minimize_scalar on -(x*u - J(u)).
+
+    ``bounds`` restricts the search to the domain on which ``J_func`` is a
+    faithful representation of J: for the H=1/2 closed form (Proposition
+    2.12) J is known for every real u and the default wide bounds apply; for
+    a numeric J_func built by interpolating the solved grid {u_grid}, pass
+    bounds=(u_grid.min(), u_grid.max()), since outside that grid the
+    interpolation is flat and does not reflect the super-linear growth of J
+    (Lemma 2.7), which would otherwise push the optimizer to the search
+    boundary instead of the true (finite) maximizer.
+    """
 
     def neg_objective(u):
         return -(x * u - J_func(u))
 
-    res = minimize_scalar(neg_objective, bounds=(-50.0, 50.0), method="bounded",
+    res = minimize_scalar(neg_objective, bounds=bounds, method="bounded",
                            options={"xatol": 1e-10})
     return {"J_star": float(-res.fun), "u_star": float(res.x)}
