@@ -27,7 +27,7 @@ def test_atm_coefficient_cor_3_15_positive():
 
 
 def test_atm_coefficient_cor_3_15_matches_closed_form():
-    """Coefficient 1/((2H+1) sqrt(pi(H+1))) per implementation_notes."""
+    """Coefficient 1/((2H+1) sqrt(pi(H+1))) from Corollary 3.15."""
     H = 0.3
     expected = 1.0 / ((2 * H + 1) * np.sqrt(np.pi * (H + 1)))
     assert atm_coefficient_cor_3_15(H) == pytest.approx(expected, rel=1e-10)

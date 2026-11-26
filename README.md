@@ -45,8 +45,8 @@ python -m pytest
 
 Each experiment runs from the repository root and writes its tables/figures
 to `results/`. A reduced configuration (fewer Monte Carlo paths, grid points
-or discretisation levels) is used by default so the full suite completes
-within a bounded time budget; pass `--full` to use the paper's configuration.
+or discretisation levels) is used by default so the full suite finishes
+quickly; pass `--full` to use the paper's configuration.
 
 ```bash
 python -m exp.exp1   # Rate function J(u): variational problem, H=1/2 closed form, LDP/Laplace MC checks

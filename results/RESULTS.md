@@ -275,8 +275,7 @@ File: `results/exp8_kernel_comparison.csv`, `exp8_summary.json`,
   is run in full, since solving the SLSQP-constrained variational problem at
   these sizes completes in a few seconds.
 * Experiment 8's κ_H, κ̄_H bounds are found by numerical optimization over
-  x ∈ [1,100] (the paper gives no closed form for them), as noted in the
-  experiment's own uncertainties.
+  x ∈ [1,100], since the paper gives no closed form for them.
 * Figure 4.1 of the paper is reproduced qualitatively; no digitized version
   of the published figure was available to this reproduction, so the
   comparison in Experiment 7 is against the paper's analytical formulas

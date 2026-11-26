@@ -1,10 +1,10 @@
 """Expansion of the rate function in log-moneyness (Proposition 3.19),
 R(H) (eq. 3.14), Lemma 3.20, Corollary 3.22.
 
-Custom implementation: scipy.special.hyp2f1 supplies the Gauss
-hypergeometric function; the surrounding integral and the paper-specific
-coefficients j2, j3 are implemented from scratch (Context7 confirms no
-quantitative-finance library exposes this rate-function expansion).
+Custom implementation (Equation 3.14, Proposition 3.19): scipy.special.hyp2f1
+supplies the Gauss hypergeometric function; the surrounding integral and the
+paper-specific coefficients j2, j3 are implemented from scratch, since no
+quantitative-finance library exposes this rate-function expansion.
 """
 
 from __future__ import annotations

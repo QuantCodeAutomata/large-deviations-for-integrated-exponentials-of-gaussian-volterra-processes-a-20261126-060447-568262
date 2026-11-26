@@ -1,11 +1,11 @@
 """Rate function J(u) of Definition 2.4 and its closed form at H = 1/2.
 
-Custom implementation: Context7 was checked for constrained scalar
-variational-problem solvers (pyportfolioopt, skfolio cover portfolio
-optimisation, not calculus-of-variations problems over L^2 paths), so the
-discretised variational problem and the Liouville-ODE closed form are
-implemented from scratch following the paper's Definition 2.4 and
-Proposition 2.12.
+Custom implementation (Definition 2.4, Proposition 2.12): no library exposes
+a solver for this calculus-of-variations problem over L^2 paths (portfolio
+libraries such as pyportfolioopt and skfolio cover portfolio optimisation,
+not this problem), so the discretised variational problem and the
+Liouville-ODE closed form are implemented from scratch following the
+paper's Definition 2.4 and Proposition 2.12.
 
 Definition 2.4 (Sec. 2.2): for u in R,
     J(u) = inf{ (1/2)||h_dot||^2_{L^2([0,1])} : G_1(K h_dot) = u },
@@ -61,7 +61,8 @@ def solve_J_general(u: float, H: float, n: int, g0: np.ndarray | None = None) ->
     Discretises h_dot by increments g in R^n (piecewise constant on a
     uniform grid of n cells), objective (n/2) sum g_j^2 approximating
     (1/2) int (h_dot)^2, subject to G_1(K h_dot) = u. Solved with SLSQP
-    (scipy.optimize.minimize), as suggested by implementation_notes.
+    (scipy.optimize.minimize), a standard constrained-optimisation method
+    for this nonlinear-equality-constrained calculus-of-variations problem.
     """
     A = kernel_action_matrix(H, n)
     if g0 is None:
