@@ -1,0 +1,15 @@
+{
+  "mc_paths": 20000,
+  "mc_grid": 200,
+  "H_values": [
+    0.1,
+    0.3,
+    0.5
+  ],
+  "clt_variance_ratio_at_smallest_eps": {
+    "0.1": 2.3026848736150387,
+    "0.3": 1.0284005536686542,
+    "0.5": 1.0140232549204704
+  },
+  "half_case_variance_ratio_at_smallest_eps": 1.0039166104314832
+}

@@ -84,7 +84,7 @@ def solve_J_general(u: float, H: float, n: int, g0: np.ndarray | None = None) ->
         jac=objective_grad,
         constraints=[{"type": "eq", "fun": constraint}],
         method="SLSQP",
-        options={"maxiter": 300, "ftol": 1e-12},
+        options={"maxiter": 1000, "ftol": 1e-12},
     )
     return {"J": float(res.fun), "success": bool(res.success), "g": res.x, "message": res.message}
 

@@ -1,0 +1,4 @@
+non_increasing_on_neg,non_decreasing_on_pos,J_at_zero,positivity,lower_bound_quadratic_ok,H
+True,True,5.0892078870516924e-15,True,True,0.1
+True,True,1.1515741314570974e-13,True,True,0.3
+True,True,5.819612243612137e-14,True,True,0.5

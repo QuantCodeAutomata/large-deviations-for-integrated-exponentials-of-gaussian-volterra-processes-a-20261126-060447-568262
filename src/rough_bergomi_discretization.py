@@ -69,9 +69,13 @@ def rescaled_implied_vol_from_J(y: float, J_value: float) -> float:
     return abs(y) / np.sqrt(2 * J_value)
 
 
-def rescaled_implied_vol_H_half(y: float) -> float:
-    """H=1/2 exact benchmark via the closed-form J (Proposition 2.12)."""
-    J_value = J_closed_form_half(y)
+def rescaled_implied_vol_H_half(y: float, eta: float) -> float:
+    """H=1/2 exact benchmark: at H=1/2 the Riemann-Liouville and
+    Molchan-Golosov kernels coincide (both equal 1), so sigma^2(y) = v0 e^{eta y}
+    falls under the lognormal Corollary 3.4 with nu=eta, Lambda(K) =
+    J(y)/eta^2, J the closed form of Proposition 2.12. Hence the rescaled
+    implied volatility is eta*|y|/sqrt(2 J(y))."""
+    J_value = J_closed_form_half(y) / eta ** 2
     return rescaled_implied_vol_from_J(y, J_value)
 
 

@@ -1,0 +1,11 @@
+{
+  "n_discretization": 60,
+  "mc_paths": 20000,
+  "mc_grid": 200,
+  "H_values": [
+    0.1,
+    0.3,
+    0.5
+  ],
+  "max_abs_error_H_half_numeric_vs_closed_form": 0.11792021019280696
+}

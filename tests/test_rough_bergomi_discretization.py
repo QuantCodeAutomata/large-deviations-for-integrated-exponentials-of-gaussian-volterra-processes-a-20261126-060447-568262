@@ -43,8 +43,8 @@ def test_rescaled_implied_vol_H_half_symmetric_small_y():
     """At small |y|, the rescaled IV should be close for +y/-y given the
     quadratic leading term of J at H=1/2."""
     y = 0.05
-    up = rescaled_implied_vol_H_half(y)
-    down = rescaled_implied_vol_H_half(-y)
+    up = rescaled_implied_vol_H_half(y, eta=2.0)
+    down = rescaled_implied_vol_H_half(-y, eta=2.0)
     assert up == pytest.approx(down, rel=0.05)
 
 

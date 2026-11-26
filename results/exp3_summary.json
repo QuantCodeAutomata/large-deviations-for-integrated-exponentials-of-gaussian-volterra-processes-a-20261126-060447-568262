@@ -1,0 +1,13 @@
+{
+  "n_discretization": 60,
+  "mc_paths": 20000,
+  "mc_grid": 200,
+  "H_values": [
+    0.1,
+    0.3,
+    0.5
+  ],
+  "max_abs_diff_lognormal_vs_theorem_3_3": 0.00012262913267657716,
+  "mc_lognormal_smallest_T_gap": 0.5007018452430816,
+  "mc_special_case_smallest_T_gap": 0.5991938837870326
+}
